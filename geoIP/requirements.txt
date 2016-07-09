@@ -1,0 +1,2 @@
+pygeocoder == 1.2.5
+pygeoip == 0.3.2
