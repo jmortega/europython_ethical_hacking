@@ -1,0 +1,28 @@
+Date: Mon, 11 Jul 2016 13:30:56 GMT
+Expires: -1
+Cache-Control: private, max-age=0
+Content-Type: text/html; charset=ISO-8859-1
+P3P: CP="This is not a P3P policy! See https://www.google.com/support/accounts/answer/151657?hl=en for more info."
+X-XSS-Protection: 1; mode=block
+X-Frame-Options: SAMEORIGIN
+Server: gws
+Set-Cookie: NID=81=KOuobtkjxsAPgPknE27KYtCZPD2NtpgYorzUXcCjl3W5VPOfQCcM2F2CaJjvJu4o79vB7tIALynvIsnpqB6tv4OoEJ0Zbi3rUVGL09zn7x2oGmHmjlAc305AB7LJd1JA; expires=Tue, 10-Jan-2017 13:30:56 GMT; path=/; domain=.google.es; HttpOnly
+Accept-Ranges: none
+Vary: Accept-Encoding
+Connection: close
+Server: nginx
+Date: Mon, 11 Jul 2016 13:30:59 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 55751
+Connection: close
+Content-Language: en
+Vary: Accept-Language, Cookie
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: django_language=en; expires=Tue, 11-Jul-2017 13:30:59 GMT; Max-Age=31536000; Path=/
+P3P: CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM NAV"
+Strict-Transport-Security: max-age=31536000; includeSubdomains
+Date: Thu, 14 Jul 2016 14:34:24 GMT
+Server: Apache/2.2.8 (Ubuntu) DAV/2
+X-Powered-By: PHP/5.2.4-2ubuntu5.10
+Connection: close
+Content-Type: text/html
