@@ -1,8 +1,29 @@
 # -*- encoding: utf-8 -*-
 
+import PIL.ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
 from PIL import Image
+from collections import namedtuple
 import os
+
+Header= namedtuple('Header',
+    "profile_size,cmm_type,version,device_class,colour_space,"
+    "PCS,date_time,signature,sig_platform,flags,dev_manufacturer,"
+    "dev_model,dev_attributes,intent,illuminant,sig_creator,"
+    "id"
+    )
+
+def icc_profile( icc_bytes ):
+    """Decode the icc_bytes to create a Header object."""
+    header = Header( *struct.unpack( ">IIIIII12s4s4sIII8sI12s4s16s28x", icc_bytes[:128]) )
+    print( " Header:", header )
+    tag_count= struct.unpack( ">I", icc_bytes[128:128+4] )[0]
+    for tn in range(tag_count):
+        offset= 128+4+12*tn
+        sig, data_offset, data_size = struct.unpack( ">4sII", icc_bytes[offset:offset+12] )
+        data= icc_bytes[data_offset:data_offset+data_size]
+        print( "Tag", tn, sig, data[:4], data[4:8], data[8:] )
+    return header
 
 def decode_gps_info(exif):
     gpsinfo = {}
@@ -46,7 +67,22 @@ def get_exif_metadata(image_path):
                 ret[decoded] = value
     decode_gps_info(ret)
     return ret
-    
+
+def get_exif_metadata2(image_path):
+    img = Image.open(image_path)
+    for key in img.info:
+        if key == 'exif':
+            for k,v in img._getexif().items():
+                if k == 34853: # GPSInfo
+                    print( PIL.ExifTags.TAGS[k], v )
+                    for gk, gv in v.items():
+                        print(PIL.ExifTags.GPSTAGS[gk], gv )
+        elif key == 'icc_profile':
+            print( key, )
+            icc_profile( img.info[key] )
+ 
+ 
+
 def printMeta():
     for dirpath, dirnames, files in os.walk("images"):
         for name in files:
@@ -57,6 +93,7 @@ def printMeta():
                 for metadata in exif:
                     print "Metadata: %s - Value: %s " %(metadata, exif[metadata])
                 print "\n"
+                get_exif_metadata2(dirpath+os.path.sep+name)
             except:
                 import sys, traceback
                 traceback.print_exc(file=sys.stdout)
